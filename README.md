@@ -52,8 +52,6 @@ In this project, we are building a school library app using Ruby. The applicatio
 
 ### Tech Stack <a name="tech-stack"></a>
 
-This project primarily uses SQL for database management.
-
 <details>
 <summary>Programming Language</summary>
   <ul>
