@@ -1,9 +1,12 @@
-# Class containing data about a person
-class Person
+require_relative 'nameable'
+
+# This class encapsulates the attributes and behaviors of a person in the school library.
+class Person < Nameable
   attr_accessor :name, :age
   attr_reader :id
 
   def initialize(age, name = 'Unknown', parent_permission: true)
+    super()
     @id = rand(1..1000)
     @name = name
     @age = age
@@ -15,9 +18,13 @@ class Person
     of_age? || @parent_permission
   end
 
+  def correct_name
+    @name
+  end
+
   private
 
-  # Private method to check if the person is of age
+  # Private method to check if the person is of age.
   def of_age?
     @age >= 18
   end
