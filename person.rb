@@ -1,5 +1,8 @@
+# frozen_string_literal: true
+
 require_relative 'nameable'
 
+# This class encapsulates the attributes and behaviors of a person in the school library.
 class Person < Nameable
   attr_accessor :name, :age
   attr_reader :id
