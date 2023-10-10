@@ -1,5 +1,3 @@
-# frozen_string_literal: true
-
 require_relative 'nameable'
 
 # This class encapsulates the attributes and behaviors of a person in the school library.
