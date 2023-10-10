@@ -26,7 +26,7 @@ class Person < Nameable
 
   private
 
-  # Private method to check if the person is of age
+  # Private method to check if the person is of age.
   def of_age?
     @age >= 18
   end
