@@ -1,5 +1,6 @@
-# Class containing data about a person
-class Person
+require_relative 'nameable'
+
+class Person < Nameable
   attr_accessor :name, :age
   attr_reader :id
 
@@ -13,6 +14,10 @@ class Person
   # Public method to check if the person can use services
   def can_use_services?
     of_age? || @parent_permission
+  end
+
+  def correct_name
+    @name
   end
 
   private
