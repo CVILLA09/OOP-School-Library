@@ -1,10 +1,12 @@
+# frozen_string_literal: true
+
 require_relative 'nameable'
 require_relative 'rental'
 
 # This class encapsulates the attributes and behaviors of a person in the school library.
 class Person < Nameable
   attr_accessor :name, :age, :rentals
-  
+
   def initialize(age, name = 'Unknown', parent_permission: true)
     super()
     @id = rand(1..1000)
