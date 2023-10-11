@@ -1,5 +1,3 @@
-# frozen_string_literal: true
-
 # Class containing data about book rentals
 class Rental
   attr_accessor :date, :book, :person
