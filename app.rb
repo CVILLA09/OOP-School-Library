@@ -36,7 +36,6 @@ class App
   def create_person
     puts 'Do you want to create a student (1) or a teacher (2)? [Input the number]:'
     choice = gets.chomp
-
     case choice
     when '1'
       create_student
@@ -103,28 +102,23 @@ class App
   def valid_conditions_for_rental?
     if @books.empty? || @people.empty?
       puts 'There must be at least one book and one person to create a rental.'
-      return false
+      false
+    else
+      true
     end
-    true
   end
 
   def select_book
     list_books
     book_index = gets.chomp.to_i
-    unless book_index.between?(0, @books.length - 1)
-      puts 'Invalid book index.'
-      return nil
-    end
+    return nil unless book_index.between?(0, @books.length - 1)
     book_index
   end
 
   def select_person
     list_people
     person_index = gets.chomp.to_i
-    unless person_index.between?(0, @people.length - 1)
-      puts 'Invalid person index.'
-      return nil
-    end
+    return nil unless person_index.between?(0, @people.length - 1)
     person_index
   end
 
@@ -150,57 +144,15 @@ class App
     puts 'Rental created successfully'
   end
 
-    if @books.empty? || @people.empty?
-      puts 'There must be at least one book and one person to create a rental.'
-      return
-    end
-
-    puts 'Select a book from the following list by number'
-    @books.each_with_index do |book, index|
-      puts "#{index}) Title: \"#{book.title}\", Author: #{book.author}"
-    end
-
-    book_index = gets.chomp.to_i
-
-    unless book_index.between?(0, @books.length - 1)
-      puts 'Invalid book index.'
-      return
-    end
-
-    puts "\nSelect a person from the following list by number (not id)"
-    @people.each_with_index do |person, index|
-      puts "#{index}) [#{person.class}] Name: #{person.name}, ID: #{person.id}, Age: #{person.age}"
-    end
-
-    person_index = gets.chomp.to_i
-
-    unless person_index.between?(0, @people.length - 1)
-      puts 'Invalid person index.'
-      return
-    end
-
-    print "\nDate: "
-    date = gets.chomp
-
-    new_rental = Rental.new(date, @books[book_index], @people[person_index])
-    @books[book_index].add_rental(new_rental)
-
-    puts 'Rental created successfully'
-  end
-
   def list_all_rentals_for_person
     print 'ID of person: '
     id = gets.chomp.to_i
-
     person = @people.find { |p| p.id == id }
-
     if person.nil?
       puts 'Person not found.'
       return
     end
-
     rentals = person.rentals
-
     if rentals.empty?
       puts "No rentals found for person with ID #{id}."
     else
