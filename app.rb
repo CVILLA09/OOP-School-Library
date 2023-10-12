@@ -1,4 +1,5 @@
 require_relative 'book'
+require_relative 'rental'
 
 class App
     def initialize
@@ -70,7 +71,6 @@ class App
       print "Author: "
       author = gets.chomp
   
-    # Create a new book and add it to the @books array
     new_book = Book.new(title, author)
     @books << new_book
   
@@ -78,7 +78,29 @@ class App
     end
   
     def create_rental
-      puts "A new rental will be created here."
+        # Display a list of books for the user to select
+        puts "Select a book from the following list by number"
+        @books.each_with_index do |book, index|
+          puts "#{index}) Title: \"#{book.title}\", Author: #{book.author}"
+        end
+        book_index = gets.chomp.to_i
+    
+        # Display a list of people for the user to select
+        puts "\nSelect a person from the following list by number (not id)"
+        @people.each_with_index do |person, index|
+          puts "#{index}) [#{person.class}] Name: #{person.name}, ID: #{person.id}, Age: #{person.age}"
+        end
+        person_index = gets.chomp.to_i
+    
+        # Input the rental date
+        print "\nDate: "
+        date = gets.chomp
+    
+        # Create the rental and add it to the book's rentals
+        new_rental = Rental.new(date, @books[book_index], @people[person_index])
+        @books[book_index].add_rental(new_rental)
+    
+        puts "Rental created successfully"
+      end
     end
-  end
   
