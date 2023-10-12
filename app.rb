@@ -1,8 +1,9 @@
+require_relative 'book'
+
 class App
     def initialize
-      @books = []  # Initialize an empty array to store books
-      @people = []  # Initialize an empty array to store people
-      # ... other initializations
+      @books = []
+      @people = []
     end
   
     def list_all_books
@@ -49,7 +50,6 @@ class App
       print "Has parent permission? [Y/N]: "
       parent_permission = gets.chomp.downcase == 'y'
   
-      # Logic to create a student
       puts "Student created successfully"
     end
   
@@ -61,12 +61,20 @@ class App
       print "Specialization: "
       specialization = gets.chomp
   
-      # Logic to create a teacher
       puts "Teacher created successfully"
     end
   
     def create_book
-      puts "A new book will be created here."
+      print "Title: "
+      title = gets.chomp
+      print "Author: "
+      author = gets.chomp
+  
+    # Create a new book and add it to the @books array
+    new_book = Book.new(title, author)
+    @books << new_book
+  
+      puts "Book created successfully"
     end
   
     def create_rental
