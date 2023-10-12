@@ -10,8 +10,12 @@ class App
     def create_person
       puts "A new person will be created here."
     end
-
+  
     def create_book
-        puts "A new book will be created here."
-      end
+      puts "A new book will be created here."
+    end
+  
+    def create_rental
+      puts "A new rental will be created here."
+    end
   end
