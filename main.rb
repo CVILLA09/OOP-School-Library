@@ -12,22 +12,19 @@ def display_menu
 end
 
 def execute_choice(app, choice)
-  case choice
-  when '1'
-    app.list_all_books
-  when '2'
-    app.list_all_people
-  when '3'
-    app.create_person
-  when '4'
-    app.create_book
-  when '5'
-    app.create_rental
-  when '6'
-    app.list_all_rentals_for_person
-  when '7'
-    puts 'Thank you for using this app!'
-    exit
+  actions = {
+    '1' => -> { app.list_all_books },
+    '2' => -> { app.list_all_people },
+    '3' => -> { app.create_person },
+    '4' => -> { app.create_book },
+    '5' => -> { app.create_rental },
+    '6' => -> { app.list_all_rentals_for_person },
+    '7' => -> { puts 'Thank you for using this app!'; exit }
+  }
+
+  action = actions[choice]
+  if action
+    action.call
   else
     puts 'Invalid option. Please try again.'
   end
