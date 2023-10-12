@@ -1,7 +1,8 @@
 class App
     def initialize
       @books = []  # Initialize an empty array to store books
-      # ... other initializations 
+      @people = []  # Initialize an empty array to store people
+      # ... other initializations
     end
   
     def list_all_books
@@ -16,7 +17,14 @@ class App
     end
   
     def list_all_people
-      puts "List of all people will be displayed here."
+      if @people.empty?
+        puts "No people available."
+      else
+        puts "List of all people:"
+        @people.each_with_index do |person, index|
+          puts "#{index}) [#{person.class}] Name: #{person.name}, ID: #{person.id}, Age: #{person.age}"
+        end
+      end
     end
   
     def create_person
