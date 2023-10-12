@@ -1,5 +1,7 @@
 require_relative 'book'
 require_relative 'rental'
+require_relative 'student'
+require_relative 'teacher'
 
 class App
     def initialize
@@ -44,26 +46,32 @@ class App
     end
   
     def create_student
-      print "Age: "
-      age = gets.chomp
-      print "Name: "
-      name = gets.chomp
-      print "Has parent permission? [Y/N]: "
-      parent_permission = gets.chomp.downcase == 'y'
-  
-      puts "Student created successfully"
-    end
-  
-    def create_teacher
-      print "Age: "
-      age = gets.chomp
-      print "Name: "
-      name = gets.chomp
-      print "Specialization: "
-      specialization = gets.chomp
-  
-      puts "Teacher created successfully"
-    end
+        print "Age: "
+        age = gets.chomp.to_i
+        print "Name: "
+        name = gets.chomp
+        print "Has parent permission? [Y/N]: "
+        parent_permission = gets.chomp.downcase == 'y'
+    
+        new_student = Student.new(name, age, parent_permission)
+        @people << new_student
+      
+        puts "Student created successfully"
+      end
+    
+      def create_teacher
+        print "Age: "
+        age = gets.chomp.to_i
+        print "Name: "
+        name = gets.chomp
+        print "Specialization: "
+        specialization = gets.chomp
+    
+        new_teacher = Teacher.new(name, age, specialization)
+        @people << new_teacher
+      
+        puts "Teacher created successfully"
+      end
   
     def create_book
       print "Title: "
