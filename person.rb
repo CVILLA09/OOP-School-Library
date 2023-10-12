@@ -3,7 +3,7 @@ require_relative 'rental'
 
 # This class encapsulates the attributes and behaviors of a person in the school library.
 class Person < Nameable
-  attr_accessor :name, :age, :rentals
+  attr_accessor :id, :name, :age, :rentals
 
   def initialize(age, name = 'Unknown', parent_permission: true)
     super()
