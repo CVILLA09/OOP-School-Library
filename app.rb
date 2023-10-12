@@ -1,10 +1,10 @@
-# frozen_string_literal: true
 
 require_relative 'book'
 require_relative 'rental'
 require_relative 'student'
 require_relative 'teacher'
 
+# Class containing app functionality for a basic UI
 class App
   def initialize
     @books = []
@@ -87,7 +87,69 @@ class App
     puts 'Book created successfully'
   end
 
+
   def create_rental
+    return unless valid_conditions_for_rental?
+    
+    book_index = select_book
+    return if book_index.nil?
+    
+    person_index = select_person
+    return if person_index.nil?
+
+    create_new_rental(book_index, person_index)
+  end
+
+  def valid_conditions_for_rental?
+    if @books.empty? || @people.empty?
+      puts 'There must be at least one book and one person to create a rental.'
+      return false
+    end
+    true
+  end
+
+  def select_book
+    list_books
+    book_index = gets.chomp.to_i
+    unless book_index.between?(0, @books.length - 1)
+      puts 'Invalid book index.'
+      return nil
+    end
+    book_index
+  end
+
+  def select_person
+    list_people
+    person_index = gets.chomp.to_i
+    unless person_index.between?(0, @people.length - 1)
+      puts 'Invalid person index.'
+      return nil
+    end
+    person_index
+  end
+
+  def list_books
+    puts 'Select a book from the following list by number'
+    @books.each_with_index do |book, index|
+      puts "#{index}) Title: \"#{book.title}\", Author: #{book.author}"
+    end
+  end
+
+  def list_people
+    puts "\nSelect a person from the following list by number (not id)"
+    @people.each_with_index do |person, index|
+      puts "#{index}) [#{person.class}] Name: #{person.name}, ID: #{person.id}, Age: #{person.age}"
+    end
+  end
+
+  def create_new_rental(book_index, person_index)
+    print "\nDate: "
+    date = gets.chomp
+    new_rental = Rental.new(date, @books[book_index], @people[person_index])
+    @books[book_index].add_rental(new_rental)
+    puts 'Rental created successfully'
+  end
+
     if @books.empty? || @people.empty?
       puts 'There must be at least one book and one person to create a rental.'
       return
