@@ -79,36 +79,55 @@ class App
       print "Author: "
       author = gets.chomp
   
-    new_book = Book.new(title, author)
+      new_book = Book.new(title, author)
     @books << new_book
   
       puts "Book created successfully"
     end
   
     def create_rental
+        if @books.empty? || @people.empty?
+          puts "There must be at least one book and one person to create a rental."
+          return
+        end
+      
         # Display a list of books for the user to select
         puts "Select a book from the following list by number"
         @books.each_with_index do |book, index|
           puts "#{index}) Title: \"#{book.title}\", Author: #{book.author}"
         end
+      
         book_index = gets.chomp.to_i
-    
+      
+        # Validate book_index
+        unless book_index.between?(0, @books.length - 1)
+          puts "Invalid book index."
+          return
+        end
+      
         # Display a list of people for the user to select
         puts "\nSelect a person from the following list by number (not id)"
         @people.each_with_index do |person, index|
           puts "#{index}) [#{person.class}] Name: #{person.name}, ID: #{person.id}, Age: #{person.age}"
         end
+      
         person_index = gets.chomp.to_i
-    
+      
+        # Validate person_index
+        unless person_index.between?(0, @people.length - 1)
+          puts "Invalid person index."
+          return
+        end
+      
         # Input the rental date
         print "\nDate: "
         date = gets.chomp
-    
+      
         # Create the rental and add it to the book's rentals
         new_rental = Rental.new(date, @books[book_index], @people[person_index])
         @books[book_index].add_rental(new_rental)
-    
+      
         puts "Rental created successfully"
-      end
+      end      
     end
   
