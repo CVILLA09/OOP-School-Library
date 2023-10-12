@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require_relative 'decorator'
 
 # This class serves to capitalize the name of a Person object.
