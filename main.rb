@@ -19,7 +19,7 @@ def execute_choice(app, choice)
     '4' => -> { app.create_book },
     '5' => -> { app.create_rental },
     '6' => -> { app.list_all_rentals_for_person },
-    '7' => -> { 
+    '7' => lambda {
       puts 'Thank you for using this app!'
       exit
     }
