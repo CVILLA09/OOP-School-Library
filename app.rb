@@ -1,3 +1,5 @@
 class App
-    # Methods will go here
+    def list_all_books
+      puts "List of all books will be displayed here."
+    end
   end
