@@ -1,6 +1,18 @@
 class App
+    def initialize
+      @books = []  # Initialize an empty array to store books
+      # ... other initializations 
+    end
+  
     def list_all_books
-      puts "List of all books will be displayed here."
+      if @books.empty?
+        puts "No books available."
+      else
+        puts "List of all books:"
+        @books.each_with_index do |book, index|
+          puts "#{index}) Title: \"#{book.title}\", Author: #{book.author}"
+        end
+      end
     end
   
     def list_all_people
@@ -19,3 +31,4 @@ class App
       puts "A new rental will be created here."
     end
   end
+  
