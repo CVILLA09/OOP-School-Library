@@ -59,7 +59,7 @@ class App
         puts "Student created successfully"
     end    
     
-      def create_teacher
+    def create_teacher
         print "Age: "
         age = gets.chomp.to_i
         print "Name: "
@@ -67,11 +67,11 @@ class App
         print "Specialization: "
         specialization = gets.chomp
     
-        new_teacher = Teacher.new(name, age, specialization)
+        new_teacher = Teacher.new(specialization, age, name)  # Note the argument order
         @people << new_teacher
-      
+    
         puts "Teacher created successfully"
-      end
+    end    
   
     def create_book
       print "Title: "
