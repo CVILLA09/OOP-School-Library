@@ -1,4 +1,3 @@
-
 require_relative 'book'
 require_relative 'rental'
 require_relative 'student'
@@ -56,7 +55,6 @@ class App
 
     new_student = Student.new(age, name, parent_permission: parent_permission)
     @people << new_student
-
     puts 'Student created successfully'
   end
 
@@ -70,7 +68,6 @@ class App
 
     new_teacher = Teacher.new(specialization, age, name)
     @people << new_teacher
-
     puts 'Teacher created successfully'
   end
 
@@ -82,17 +79,15 @@ class App
 
     new_book = Book.new(title, author)
     @books << new_book
-
     puts 'Book created successfully'
   end
 
-
   def create_rental
     return unless valid_conditions_for_rental?
-    
+
     book_index = select_book
     return if book_index.nil?
-    
+
     person_index = select_person
     return if person_index.nil?
 
@@ -112,6 +107,7 @@ class App
     list_books
     book_index = gets.chomp.to_i
     return nil unless book_index.between?(0, @books.length - 1)
+
     book_index
   end
 
@@ -119,6 +115,7 @@ class App
     list_people
     person_index = gets.chomp.to_i
     return nil unless person_index.between?(0, @people.length - 1)
+
     person_index
   end
 
