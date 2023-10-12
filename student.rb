@@ -5,11 +5,11 @@ require_relative 'classroom'
 class Student < Person
   attr_accessor :classroom
 
-  def initialize(classroom, age, name = 'Unknown', parent_permission: true)
+  def initialize(age, name, parent_permission: true, classroom: Classroom.new("Default"))
     super(age, name, parent_permission)
     @classroom = classroom
     classroom.add_student(self)
-  end
+  end  
 
   def play_hooky
     '¯\\_(ツ)_/¯'
