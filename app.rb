@@ -43,7 +43,20 @@ class App
            author = gets.chomp
            @book_manager.create_book(title, author)
          },
-      '5' => -> { @rental_manager.create_new_rental },
+         '5' => lambda {
+          return unless @rental_manager.valid_conditions_for_rental?
+        
+          book_index = @rental_manager.select_book
+          return if book_index.nil?
+        
+          person_index = @rental_manager.select_person
+          return if person_index.nil?
+        
+          print "\nDate: "
+          date = gets.chomp
+        
+          @rental_manager.create_new_rental(book_index, person_index, date)
+        },
       '6' => -> { @rental_manager.list_all_rentals_for_person },
       '7' => lambda {
                puts 'Thank you for using this app!'

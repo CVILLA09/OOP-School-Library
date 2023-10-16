@@ -25,17 +25,7 @@ class RentalManager
     person_index
   end
 
-  def create_new_rental
-    return unless valid_conditions_for_rental?
-
-    book_index = select_book
-    return if book_index.nil?
-
-    person_index = select_person
-    return if person_index.nil?
-
-    print "\nDate: "
-    date = gets.chomp
+  def create_new_rental(book_index, person_index, date)
     new_rental = Rental.new(date, @book_manager.books[book_index], @person_manager.people[person_index])
     @book_manager.books[book_index].add_rental(new_rental)
     puts 'Rental created successfully'
