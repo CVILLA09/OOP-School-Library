@@ -3,11 +3,12 @@ require_relative 'rental'
 require_relative 'student'
 require_relative 'teacher'
 
-# Class containing app functionality for a basic UI
-class App
+# Class responsible for book management
+class BookManager
+  attr_accessor :books
+
   def initialize
     @books = []
-    @people = []
   end
 
   def list_all_books
@@ -19,6 +20,26 @@ class App
         puts "#{index}) Title: \"#{book.title}\", Author: #{book.author}"
       end
     end
+  end
+
+  def create_book
+    print 'Title: '
+    title = gets.chomp
+    print 'Author: '
+    author = gets.chomp
+
+    new_book = Book.new(title, author)
+    @books << new_book
+    puts 'Book created successfully'
+  end
+end
+
+# Class responsible for person management
+class PersonManager
+  attr_accessor :people
+
+  def initialize
+    @people = []
   end
 
   def list_all_people
@@ -33,7 +54,7 @@ class App
   end
 
   def create_person
-    puts 'Do you want to create a student (1) or a teacher (2)? [Input the number]:'
+    print 'Do you want to create a student (1) or a teacher (2)? [Input the number]: '
     choice = gets.chomp
     case choice
     when '1'
@@ -70,32 +91,72 @@ class App
     @people << new_teacher
     puts 'Teacher created successfully'
   end
+end
 
-  def create_book
-    print 'Title: '
-    title = gets.chomp
-    print 'Author: '
-    author = gets.chomp
-
-    new_book = Book.new(title, author)
-    @books << new_book
-    puts 'Book created successfully'
+# Class containing app functionality for a basic UI
+class App
+  def initialize
+    puts 'Welcome to School Library App!'
+    @book_manager = BookManager.new
+    @person_manager = PersonManager.new
   end
 
-  def create_rental
+  def handle_user_choice(choice)
+    case choice
+    when '1'
+      @book_manager.list_all_books
+    when '2'
+      @person_manager.list_all_people
+    when '3'
+      @person_manager.create_person
+    when '4'
+      @book_manager.create_book
+    when '5'
+      create_new_rental
+    when '6'
+      list_all_rentals_for_person
+    when '7'
+      puts 'Thank you for using this app!'
+      exit
+    else
+      puts 'Invalid option. Please try again.'
+    end
+  end
+
+  def select_book(books)
+    @book_manager.list_all_books
+    book_index = gets.chomp.to_i
+    return nil unless book_index.between?(0, books.length - 1)
+
+    book_index
+  end
+
+  def select_person(people)
+    @person_manager.list_all_people
+    person_index = gets.chomp.to_i
+    return nil unless person_index.between?(0, people.length - 1)
+
+    person_index
+  end
+
+  def create_new_rental
     return unless valid_conditions_for_rental?
 
-    book_index = select_book
+    book_index = select_book(@book_manager.books)
     return if book_index.nil?
 
-    person_index = select_person
+    person_index = select_person(@person_manager.people)
     return if person_index.nil?
 
-    create_new_rental(book_index, person_index)
+    print "\nDate: "
+    date = gets.chomp
+    new_rental = Rental.new(date, @book_manager.books[book_index], @person_manager.people[person_index])
+    @book_manager.books[book_index].add_rental(new_rental)
+    puts 'Rental created successfully'
   end
 
   def valid_conditions_for_rental?
-    if @books.empty? || @people.empty?
+    if @book_manager.books.empty? || @person_manager.people.empty?
       puts 'There must be at least one book and one person to create a rental.'
       false
     else
@@ -103,48 +164,10 @@ class App
     end
   end
 
-  def select_book
-    list_books
-    book_index = gets.chomp.to_i
-    return nil unless book_index.between?(0, @books.length - 1)
-
-    book_index
-  end
-
-  def select_person
-    list_people
-    person_index = gets.chomp.to_i
-    return nil unless person_index.between?(0, @people.length - 1)
-
-    person_index
-  end
-
-  def list_books
-    puts 'Select a book from the following list by number'
-    @books.each_with_index do |book, index|
-      puts "#{index}) Title: \"#{book.title}\", Author: #{book.author}"
-    end
-  end
-
-  def list_people
-    puts "\nSelect a person from the following list by number (not id)"
-    @people.each_with_index do |person, index|
-      puts "#{index}) [#{person.class}] Name: #{person.name}, ID: #{person.id}, Age: #{person.age}"
-    end
-  end
-
-  def create_new_rental(book_index, person_index)
-    print "\nDate: "
-    date = gets.chomp
-    new_rental = Rental.new(date, @books[book_index], @people[person_index])
-    @books[book_index].add_rental(new_rental)
-    puts 'Rental created successfully'
-  end
-
   def list_all_rentals_for_person
     print 'ID of person: '
     id = gets.chomp.to_i
-    person = @people.find { |p| p.id == id }
+    person = @person_manager.people.find { |p| p.id == id }
     if person.nil?
       puts 'Person not found.'
       return
