@@ -14,7 +14,7 @@ class App
     @person_manager = PersonManager.new
     @rental_manager = RentalManager.new(@book_manager, @person_manager)
   end
-  
+
   def handle_user_choice(choice)
     actions = {
       '1' => -> { @book_manager.list_all_books },
