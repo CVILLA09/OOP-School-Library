@@ -20,7 +20,13 @@ class App
       '1' => -> { @book_manager.list_all_books },
       '2' => -> { @person_manager.list_all_people },
       '3' => -> { @person_manager.create_person },
-      '4' => -> { @book_manager.create_book },
+      '4' => lambda {
+           print 'Title: '
+           title = gets.chomp
+           print 'Author: '
+           author = gets.chomp
+           @book_manager.create_book(title, author)
+         },
       '5' => -> { @rental_manager.create_new_rental },
       '6' => -> { @rental_manager.list_all_rentals_for_person },
       '7' => lambda {
