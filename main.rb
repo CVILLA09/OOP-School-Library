@@ -11,37 +11,15 @@ def display_menu
   puts '7 - Exit'
 end
 
-def execute_choice(app, choice)
-  actions = {
-    '1' => -> { app.list_all_books },
-    '2' => -> { app.list_all_people },
-    '3' => -> { app.create_person },
-    '4' => -> { app.create_book },
-    '5' => -> { app.create_rental },
-    '6' => -> { app.list_all_rentals_for_person },
-    '7' => lambda {
-      puts 'Thank you for using this app!'
-      exit
-    }
-  }
+# Initialize the App
+app = App.new
 
-  action = actions[choice]
-  if action
-    action.call
-  else
-    puts 'Invalid option. Please try again.'
-  end
+# Main program loop
+loop do
+  display_menu
+  choice = gets.chomp
+  break if choice == 'quit'
+
+  # Delegate the actual work to the App class
+  app.handle_user_choice(choice)
 end
-
-def main
-  puts 'Welcome to School Library App!'
-  app = App.new
-
-  loop do
-    display_menu
-    choice = gets.chomp
-    execute_choice(app, choice)
-  end
-end
-
-main
