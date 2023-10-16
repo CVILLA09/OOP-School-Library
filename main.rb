@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require_relative 'app'
 
 def display_menu
@@ -19,7 +21,7 @@ loop do
   display_menu
   choice = gets.chomp
   break if choice == 'quit'
-  
+
   # Delegate the actual work to the App class
   app.handle_user_choice(choice)
 end

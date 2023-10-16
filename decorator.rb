@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require_relative 'nameable'
 
 # This class serves as the base decorator for other specific decorators.
