@@ -109,9 +109,12 @@ class App
       '4' => -> { @book_manager.create_book },
       '5' => -> { create_new_rental },
       '6' => -> { list_all_rentals_for_person },
-      '7' => -> { puts 'Thank you for using this app!'; exit }
+      '7' => lambda {
+               puts 'Thank you for using this app!'
+               exit
+             }
     }
-    
+
     if actions.key?(choice)
       actions[choice].call
     else
