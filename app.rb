@@ -104,22 +104,18 @@ class App
   end
 
   def handle_user_choice(choice)
-    case choice
-    when '1'
-      @book_manager.list_all_books
-    when '2'
-      @person_manager.list_all_people
-    when '3'
-      @person_manager.create_person
-    when '4'
-      @book_manager.create_book
-    when '5'
-      create_new_rental
-    when '6'
-      list_all_rentals_for_person
-    when '7'
-      puts 'Thank you for using this app!'
-      exit
+    actions = {
+      '1' => -> { @book_manager.list_all_books },
+      '2' => -> { @person_manager.list_all_people },
+      '3' => -> { @person_manager.create_person },
+      '4' => -> { @book_manager.create_book },
+      '5' => -> { create_new_rental },
+      '6' => -> { list_all_rentals_for_person },
+      '7' => -> { puts 'Thank you for using this app!'; exit }
+    }
+    
+    if actions.key?(choice)
+      actions[choice].call
     else
       puts 'Invalid option. Please try again.'
     end
