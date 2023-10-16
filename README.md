@@ -131,10 +131,6 @@ To run tests:
 
 Features to be added in upcoming iterations:
 
-- **Project 2**: Use the "Decorator" design pattern.
-- **Project 3**: Set up associations between classes.
-- **Project 4**: Add a basic user interface for easier interaction.
-- **Project 5**: Refactor code to improve program efficiency and maintainability.
 - **Project 6**: Implement data persistence to save and load library data.
 - **Project 7**: Introduce unit tests to ensure code reliability.
 
