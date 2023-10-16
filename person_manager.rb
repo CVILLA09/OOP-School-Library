@@ -17,40 +17,24 @@ class PersonManager
     end
   end
 
-  def create_person
-    print 'Do you want to create a student (1) or a teacher (2)? [Input the number]: '
-    choice = gets.chomp
+  def create_person(choice, age, name, additional_info)
     case choice
     when '1'
-      create_student
+      create_student(age, name, additional_info)
     when '2'
-      create_teacher
+      create_teacher(age, name, additional_info)
     else
       puts 'Invalid option. No person was created.'
     end
   end
 
-  def create_student
-    print 'Age: '
-    age = gets.chomp.to_i
-    print 'Name: '
-    name = gets.chomp
-    print 'Has parent permission? [Y/N]: '
-    parent_permission = gets.chomp.downcase == 'y'
-
+  def create_student(age, name, parent_permission)
     new_student = Student.new(age, name, parent_permission: parent_permission)
     @people << new_student
     puts 'Student created successfully'
   end
 
-  def create_teacher
-    print 'Age: '
-    age = gets.chomp.to_i
-    print 'Name: '
-    name = gets.chomp
-    print 'Specialization: '
-    specialization = gets.chomp
-
+  def create_teacher(age, name, specialization)
     new_teacher = Teacher.new(specialization, age, name)
     @people << new_teacher
     puts 'Teacher created successfully'

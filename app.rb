@@ -19,7 +19,23 @@ class App
     actions = {
       '1' => -> { @book_manager.list_all_books },
       '2' => -> { @person_manager.list_all_people },
-      '3' => -> { @person_manager.create_person },
+      '3' => lambda {
+        print 'Do you want to create a student (1) or a teacher (2)? [Input the number]: '
+        choice = gets.chomp
+        print 'Age: '
+        age = gets.chomp.to_i
+        print 'Name: '
+        name = gets.chomp
+        additional_info = case choice
+                          when '1'
+                            print 'Has parent permission? [Y/N]: '
+                            gets.chomp.downcase == 'y'
+                          when '2'
+                            print 'Specialization: '
+                            gets.chomp
+                          end
+        @person_manager.create_person(choice, age, name, additional_info)
+      },
       '4' => lambda {
            print 'Title: '
            title = gets.chomp
