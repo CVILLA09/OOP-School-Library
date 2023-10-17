@@ -67,6 +67,7 @@ class App
       '6' => -> { @rental_manager.list_all_rentals_for_person },
       '7' => lambda {
         @person_manager.save_people_to_json 
+        @book_manager.save_books_to_json
                puts 'Thank you for using this app!'
                exit
              }
