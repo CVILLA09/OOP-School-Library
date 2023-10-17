@@ -11,6 +11,7 @@ class App
   def initialize
     puts 'Welcome to School Library App!'
     @book_manager = BookManager.new
+    @book_manager.load_books_from_json 
     @person_manager = PersonManager.new
     @rental_manager = RentalManager.new(@book_manager, @person_manager)
   end
