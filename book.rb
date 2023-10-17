@@ -19,8 +19,13 @@ class Book
   # Return a JSON representation of the book
   def to_json(*_args)
     {
+      'JSON_CLASS' => self.class.name,
       'title' => @title,
       'author' => @author
     }.to_json
+  end
+
+  def self.new_from_json(json_hash)
+    new(json_hash['title'], json_hash['author'])
   end
 end

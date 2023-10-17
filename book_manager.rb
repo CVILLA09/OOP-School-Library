@@ -6,7 +6,7 @@ class BookManager
 
   def initialize
     @books = []
-    load_books_from_json if File.exist?('books.json')  # Load books from JSON file if it exists
+    load_books_from_json if File.exist?('books.json')
   end
 
   def list_all_books
