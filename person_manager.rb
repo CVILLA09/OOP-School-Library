@@ -44,7 +44,7 @@ class PersonManager
 
   def save_people_to_json
     File.open('people.json', 'w') do |f|
-      f.write(JSON.dump(@people))
+      f.write(@people.map(&:to_json).to_json)
     end
-  end  
+  end   
 end

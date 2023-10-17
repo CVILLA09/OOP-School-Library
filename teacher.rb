@@ -10,4 +10,14 @@ class Teacher < Person
   def can_use_services?
     true
   end
+
+  def to_json(*_args)
+    {
+      'JSON_CLASS' => self.class.name,
+      'name' => @name,
+      'age' => @age,
+      'id' => @id,
+      'parent_permission' => @parent_permission
+    }.to_json
+  end  
 end
