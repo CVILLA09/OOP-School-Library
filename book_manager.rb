@@ -37,6 +37,11 @@ class BookManager
   # Read the 'books.json' file, deserialize the JSON data, and populate the @books array
   def load_books_from_json
     json_data = File.read('books.json')
+    if json_data.strip.empty?
+      puts 'No books data to load.'
+      return
+    end
+
     array_of_strings = JSON.parse(json_data)
 
     array_of_strings.each do |string|

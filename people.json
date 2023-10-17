@@ -1,6 +1,1 @@
-[
-    "{\"JSON_CLASS\":\"Student\",\"name\":\"Peter Parker \",\"age\":18,\"id\":16,\"parent_permission\":true}",
-    "{\"JSON_CLASS\":\"Student\",\"name\":\"Mary Jane \",\"age\":18,\"id\":966,\"parent_permission\":false}",
-    "{\"JSON_CLASS\":\"Student\",\"name\":\"Peter Parker\",\"age\":18,\"id\":347,\"parent_permission\":true}",
-    "{\"JSON_CLASS\":\"Student\",\"name\":\"Mary Jane\",\"age\":18,\"id\":848,\"parent_permission\":false}"
-]
+["{\"JSON_CLASS\":\"Student\",\"name\":\"Peter Parker \",\"age\":18,\"id\":967,\"parent_permission\":true}","{\"JSON_CLASS\":\"Student\",\"name\":\"Mary Jane \",\"age\":18,\"id\":541,\"parent_permission\":false}","{\"JSON_CLASS\":\"Student\",\"name\":\"Peter Parker\",\"age\":18,\"id\":995,\"parent_permission\":true}","{\"JSON_CLASS\":\"Student\",\"name\":\"Mary Jane\",\"age\":18,\"id\":773,\"parent_permission\":false}"]

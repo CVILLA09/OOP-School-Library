@@ -1,4 +1,4 @@
-require 'json'  # Required for JSON operations
+require 'json'
 require_relative 'rental'
 
 # Class containing data about books
