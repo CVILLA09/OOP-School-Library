@@ -28,8 +28,10 @@ class BookManager
 
   # Serialize the @books array to JSON and save it to 'books.json'
   def save_books_to_json
-    json_data = JSON.generate(@books.map(&:to_json))
-    File.write('books.json', json_data)
+    File.open('books.json', 'w') do |f|
+      data_to_write = @books.map(&:to_json).to_json
+      f.write(data_to_write)
+    end
   end
 
   # Read the 'books.json' file, deserialize the JSON data, and populate the @books array
