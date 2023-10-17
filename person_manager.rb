@@ -1,3 +1,5 @@
+require 'json'
+
 # Class responsible for person management
 class PersonManager
   attr_accessor :people
@@ -39,4 +41,10 @@ class PersonManager
     @people << new_teacher
     puts 'Teacher created successfully'
   end
+
+  def save_people_to_json
+    File.open('people.json', 'w') do |f|
+      f.write(JSON.dump(@people))
+    end
+  end  
 end
