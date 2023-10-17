@@ -1,36 +1,55 @@
+require 'json'
 # Class responsible for rental management
 class RentalManager
-  attr_accessor :book_manager, :person_manager
-
+  attr_accessor :book_manager, :person_manager, :rentals
   def initialize(book_manager, person_manager)
     @book_manager = book_manager
     @person_manager = person_manager
+    @rentals = []
+    load_rentals_from_json if File.exist?('rentals.json')
   end
-
   # Select book from available books
   def select_book
     @book_manager.list_all_books
     book_index = gets.chomp.to_i
     return nil unless book_index.between?(0, @book_manager.books.length - 1)
-
     book_index
   end
-
   # Select person from available people
   def select_person
     @person_manager.list_all_people
     person_index = gets.chomp.to_i
     return nil unless person_index.between?(0, @person_manager.people.length - 1)
-
     person_index
   end
-
+  # Serialize the @rentals array to JSON and save it to 'rentals.json'
+  def save_rentals_to_json
+    File.open('rentals.json', 'w') do |f|
+      data_to_write = @rentals.map(&:to_json).to_json
+      f.write(data_to_write)
+    end
+  end
+  # Read the 'rentals.json' file, deserialize the JSON data, and populate the @rentals array
+  def load_rentals_from_json
+    begin
+      json_data = File.read('rentals.json')
+      array_of_strings = JSON.parse(json_data)
+      array_of_strings.each do |string|
+        hash = JSON.parse(string)
+        book = @book_manager.books.find { |b| b.title == hash['book_title'] && b.author == hash['book_author'] }
+        person = @person_manager.people.find { |p| p.id == hash['person_id'] }
+        @rentals << Rental.new(hash['date'], book, person) if book && person
+      end
+    rescue JSON::ParserError => e
+      puts "Could not parse rentals.json: #{e.message}"
+    end
+  end
   def create_new_rental(book_index, person_index, date)
     new_rental = Rental.new(date, @book_manager.books[book_index], @person_manager.people[person_index])
     @book_manager.books[book_index].add_rental(new_rental)
+    @rentals << new_rental
     puts 'Rental created successfully'
   end
-
   def valid_conditions_for_rental?
     if @book_manager.books.empty? || @person_manager.people.empty?
       puts 'There must be at least one book and one person to create a rental.'
@@ -39,7 +58,6 @@ class RentalManager
       true
     end
   end
-
   def list_all_rentals_for_person
     print 'ID of person: '
     id = gets.chomp.to_i
