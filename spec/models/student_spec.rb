@@ -2,16 +2,16 @@ require 'json'
 require './student'
 
 RSpec.describe Student do
-  let(:student) { Student.new(20, "Felipe")}
+  let(:student) { Student.new(20, 'Felipe') }
 
   describe 'Create a new student' do
-    it 'Should creates a new instance of Student' do 
+    it 'Should creates a new instance of Student' do
       expect(student).to be_a(Student)
     end
 
-    it 'Should have a name and age' do 
+    it 'Should have a name and age' do
       expect(student.age).to eq(20)
-      expect(student.name).to eq("Felipe")
+      expect(student.name).to eq('Felipe')
     end
   end
 

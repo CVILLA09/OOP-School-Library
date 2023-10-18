@@ -2,22 +2,22 @@ require 'json'
 require './teacher'
 
 RSpec.describe Teacher do
-  let(:teacher) { Teacher.new("Math", 45, "Nancy")}
+  let(:teacher) { Teacher.new('Math', 45, 'Nancy') }
 
   describe 'Create a new teacher' do
-    it 'Should creates a new instance of teacher' do 
+    it 'Should creates a new instance of teacher' do
       expect(teacher).to be_a(Teacher)
     end
 
-    it 'Should have a specialization, name and age' do 
-      expect(teacher.specialization).to eq("Math")
+    it 'Should have a specialization, name and age' do
+      expect(teacher.specialization).to eq('Math')
       expect(teacher.age).to eq(45)
-      expect(teacher.name).to eq("Nancy")
+      expect(teacher.name).to eq('Nancy')
     end
   end
 
   describe 'Can she use services?' do
-    it 'Should use services' do 
+    it 'Should use services' do
       expect(teacher.can_use_services?).to eq(true)
     end
   end
