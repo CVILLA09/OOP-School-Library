@@ -1,4 +1,5 @@
 require 'json'
+# Class responsible for person management
 class PersonManager
   attr_accessor :people
 

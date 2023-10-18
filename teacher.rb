@@ -24,6 +24,7 @@ class Teacher < Person
   end
 
   def self.new_from_json(json_hash)
-    new(json_hash['specialization'], json_hash['age'], json_hash['name'], parent_permission: json_hash['parent_permission']) # Include specialization and parent_permission
+    new(json_hash['specialization'], json_hash['age'], json_hash['name'],
+        parent_permission: json_hash['parent_permission'])
   end
 end
