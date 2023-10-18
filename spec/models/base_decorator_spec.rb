@@ -1,4 +1,4 @@
-require_relative '../../base_decorator'
+require_relative '../../decorator'
 
 describe 'BaseDecorator' do
   let(:nameable_instance) { double('Nameable', correct_name: 'john') }

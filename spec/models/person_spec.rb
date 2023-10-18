@@ -1,10 +1,11 @@
 require './person'
-require './book'
 require './rental'
+require './book'
 
 RSpec.describe Person do
   let(:person) { Person.new(20, 'Jhon') }
-  let(:book) { Book.new('Mock title', 'Mock author') }
+  let(:book) { Book.new('Mock Book', 'Mock Author') }
+  let(:rental) { Rental.new('2023-10-18', book, person) }
 
   describe 'Create a new person' do
     it 'Should creates a new instance of person' do
@@ -14,6 +15,18 @@ RSpec.describe Person do
     it 'Should have a name and age' do
       expect(person.name).to eq('Jhon')
       expect(person.age).to eq(20)
+    end
+  end
+
+  describe 'add_rental' do
+    it 'adds a rental to the person' do
+      person.add_rental(rental)
+      expect(person.rentals).to include(rental)
+    end
+
+    it 'sets the person for the rental' do
+      person.add_rental(rental)
+      expect(rental.person).to eq(person)
     end
   end
 
