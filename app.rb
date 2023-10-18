@@ -5,7 +5,6 @@ require_relative 'teacher'
 require_relative 'rental_manager'
 require_relative 'book_manager'
 require_relative 'person_manager'
-
 # Class containing app functionality for a basic UI
 class App
   def initialize
@@ -52,7 +51,6 @@ class App
 
     print "\nDate: "
     date = gets.chomp
-
     @rental_manager.create_new_rental(book_index, person_index, date)
   end
 
@@ -65,11 +63,13 @@ class App
       '5' => -> { create_rental_action },
       '6' => -> { @rental_manager.list_all_rentals_for_person },
       '7' => lambda {
+               @person_manager.save_people_to_json
+               @book_manager.save_books_to_json
+               @rental_manager.save_rentals_to_json
                puts 'Thank you for using this app!'
                exit
              }
     }
-
     if actions.key?(choice)
       actions[choice].call
     else
