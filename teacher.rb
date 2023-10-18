@@ -18,7 +18,7 @@ class Teacher < Person
       'name' => @name,
       'age' => @age,
       'id' => @id,
-      'specialization' => @specialization, # Include specialization
+      'specialization' => @specialization,
       'parent_permission' => @parent_permission
     }.to_json
   end
